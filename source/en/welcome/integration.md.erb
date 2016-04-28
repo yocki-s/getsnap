@@ -1,0 +1,302 @@
+## Integration
+
+***
+
+##### ***Goal:*** *Merchants integrate with Veritrans without any issue*
+***
+
+### Summary
+
+Snap will expose one endpoint which merchant can utilize: POST ‘v1/pay’. This endpoint will return `token_id` which merchant can use to generate iframe payment page in merchant’s website.
+
+<br>
+
+#### Request Headers:
+
+| Name | Format| Mandatory | Description |
+|---|---|---|
+| Accept | application/json | Yes | - |
+| Content-Type | application/json | Yes | - |
+| Authorization | Basic Base64(SERVER_KEY + ':') | Yes | - |
+
+<br>
+
+#### JSON Body (Long term):
+
+~~~ JSON
+
+{
+    "transaction_details": {
+        "order_id": "hafizh-{{$timestamp}}",
+        "gross_amount": 10000,
+        "currency": "IDR"
+    },
+    
+    "callbacks" : {
+        "finish":"http://www.sneekers.co.id/payment/finish",
+        "error": "http://www.sneekers.co.id/payment/error"
+    },
+
+    "enabled_payments": ["credit_card", "bank_transfer", "bca_klikbca", "bca_klikpay", "cimb_clicks", "mandiri_clickpay", "bri_epay", "telkomsel_cash", "xl_tunai", "bbm_money", "mandiri_ecash", "echannel"],
+
+    "credit_card": {
+        "3d_secure": false,
+        "allow_save_card": true,
+        "whitelist_bins": ["41","48","42","44","5","bni"],
+        "channel": "migs",
+        "bank": "bca",
+        "installment": {
+            "required": true,
+            "terms": {
+                "bni": [3,6,12],
+                "mandiri": [3,6,12],
+                "cimb": [3,6,12],
+                "bca" : [3,6,12],
+                "offline": [3,6,12]
+            }
+        },
+        "point": {
+            "redeem_amount": 1000
+        }
+    },
+
+    "bank_transfer": {
+        "banks": ["permata", "bca"],
+        "free_text": {
+            "inquiry": [
+                {
+                    "en": "inquiry_en_1",
+                    "id": "inquiry_id_1"
+                },
+                {
+                    "en": "inquiry_en_2",
+                    "id": "inquiry_id_2"
+                }
+            ],
+            "payment": [
+                {
+                    "en": "payment_en_1",
+                    "id": "payment_id_1"
+                },
+                {
+                    "en": "payment_en_2",
+                    "id": "payment_id_2"
+                },
+                {
+                    "en": "payment_en_3",
+                    "id": "payment_id_3"
+                }
+            ]
+        }
+    },
+
+    "echannel": {
+        "bill_info1": "bill info 1",
+        "bill_info2": "bill info 2",
+        "bill_info3": "bill info 3",
+        "bill_info4": "bill info 4",
+        "bill_info5": "bill info 5",
+        "bill_info6": "bill info 6",
+        "bill_info7": "bill info 7",
+        "bill_info8": "bill info 8"
+    },
+
+    "item_details": [
+        {
+            "id": "ITEM1",
+            "price": 10000,
+            "quantity": 1,
+            "name": "Mask of Madness"
+        }
+    ],
+
+    "customer_details": {
+        "first_name": "customer",
+        "last_name": "email",
+        "email": "hafizh@myemail.com",
+        "phone": "082147378918",
+        "billing_address": {
+            "first_name": "billing",
+            "last_name": "email",
+            "email": "test@myemail.com",
+            "phone": "082147378918",
+            "address": "Sudirman",
+            "city": "Jakarta",
+            "postal_code": "12190",
+            "country_code": "IDN"
+        },
+        "shipping_address": {
+            "first_name": "shipping",
+            "last_name": "email",
+            "email": "hafizh@myemail.com",
+            "phone": "082147378918",
+            "address": "Sudirman",
+            "city": "Jakarta",
+            "postal_code": "12190",
+            "country_code": "IDN"
+        }
+    },
+
+    "expiry": {
+        "start_time": "2017-01-11 11:52:00 +0700",
+        "unit": "day",
+        "duration": 1
+    },
+  
+    "custom": {
+        "flight_id": "JT-595",
+        "date": "2016-04-01 13:45:00 +0700",
+        "discount": "0.2"
+    }
+}
+{
+    "transaction_details": {
+        "order_id": "hafizh-{{$timestamp}}",
+        "gross_amount": 10000,
+        "currency": "IDR"
+    },
+    
+    "callbacks" : {
+        "finish":"http://www.sneekers.co.id/payment/finish",
+        "error": "http://www.sneekers.co.id/payment/error"
+    },
+
+    "enabled_payments": ["credit_card", "bank_transfer", "bca_klikbca", "bca_klikpay", "cimb_clicks", "mandiri_clickpay", "bri_epay", "telkomsel_cash", "xl_tunai", "bbm_money", "mandiri_ecash", "echannel"],
+
+    "credit_card": {
+        "3d_secure": false,
+        "allow_save_card": true,
+        "whitelist_bins": ["41","48","42","44","5","bni"],
+        "channel": "migs",
+        "bank": "bca",
+        "installment": {
+            "required": true,
+            "terms": {
+                "bni": [3,6,12],
+                "mandiri": [3,6,12],
+                "cimb": [3,6,12],
+                "bca" : [3,6,12],
+                "offline": [3,6,12]
+            }
+        },
+        "point": {
+            "redeem_amount": 1000
+        }
+    },
+
+    "bank_transfer": {
+        "banks": ["permata", "bca"],
+        "free_text": {
+            "inquiry": [
+                {
+                    "en": "inquiry_en_1",
+                    "id": "inquiry_id_1"
+                },
+                {
+                    "en": "inquiry_en_2",
+                    "id": "inquiry_id_2"
+                }
+            ],
+            "payment": [
+                {
+                    "en": "payment_en_1",
+                    "id": "payment_id_1"
+                },
+                {
+                    "en": "payment_en_2",
+                    "id": "payment_id_2"
+                },
+                {
+                    "en": "payment_en_3",
+                    "id": "payment_id_3"
+                }
+            ]
+        }
+    },
+
+    "echannel": {
+        "bill_info1": "bill info 1",
+        "bill_info2": "bill info 2",
+        "bill_info3": "bill info 3",
+        "bill_info4": "bill info 4",
+        "bill_info5": "bill info 5",
+        "bill_info6": "bill info 6",
+        "bill_info7": "bill info 7",
+        "bill_info8": "bill info 8"
+    },
+
+    "item_details": [
+        {
+            "id": "ITEM1",
+            "price": 10000,
+            "quantity": 1,
+            "name": "Mask of Madness"
+        }
+    ],
+
+    "customer_details": {
+        "first_name": "customer",
+        "last_name": "email",
+        "email": "hafizh@myemail.com",
+        "phone": "082147378918",
+        "billing_address": {
+            "first_name": "billing",
+            "last_name": "email",
+            "email": "test@myemail.com",
+            "phone": "082147378918",
+            "address": "Sudirman",
+            "city": "Jakarta",
+            "postal_code": "12190",
+            "country_code": "IDN"
+        },
+        "shipping_address": {
+            "first_name": "shipping",
+            "last_name": "email",
+            "email": "hafizh@myemail.com",
+            "phone": "082147378918",
+            "address": "Sudirman",
+            "city": "Jakarta",
+            "postal_code": "12190",
+            "country_code": "IDN"
+        }
+    },
+
+    "expiry": {
+        "start_time": "2017-01-11 11:52:00 +0700",
+        "unit": "day",
+        "duration": 1
+    },
+  
+    "custom": {
+        "flight_id": "JT-595",
+        "date": "2016-04-01 13:45:00 +0700",
+        "discount": "0.2"
+    }
+}
+
+~~~
+
+<br>
+
+#### Valid JSON Response(HTTP 200)
+
+- No `status` attribute
+- No `status_message` attribute
+
+		{
+	  	"token_id": "abcdefghijklmnopqrstu"
+		}
+
+<br>
+
+#### Error JSON Response(HTTP 422)
+
+- HTTP status reflect the result
+- No `status` attribute
+- No `status_message` attribute
+
+		{
+	  	"error_message": ["Order id has been utilized"]
+		}
+
+<br>

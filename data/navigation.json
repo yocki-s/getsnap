@@ -1,0 +1,31 @@
+{
+  "welcome": { 
+      "submenu":[
+        {"en": "Introduction", "id": "Perkenalan", "link" : "/welcome/index.html"},
+        {"en":"Integration", "id": "Integrasi", "link":"/welcome/integration.html"},
+        {"en":"Sample code", "id": "Contoh kode", "link":"/welcome/sample.html"},
+        {"en":"Testing", "id": "Testing", "link":"/welcome/testing.html"}
+      ],
+      "label" : {"en" : "Getting Started", "id" : "Langkah Awal"}
+  },
+  // "SNAP": {
+  //     "submenu": [
+  //       {"en":"Integration", "id": "Integrasi", "link":"/vtweb/integration.html"},
+  //       {"en":"Other Features", "id": "Fitur Tambahan", "link":"/vtweb/other_features.html"},
+  //       {"en":"Going Live", "id": "Going Live", "link":"/vtweb/going_live.html"}
+  //     ],
+  //     "label" : {"en" : "SNAP", "id" : "SNAP"}
+  // },
+  //   "testing": {
+  //     "submenu": [
+  //       {"en":"Transaction Credentials", "id": "Uji Coba Transaksi", "link":"/api/test_credentials.html"}
+  //     ],
+  //     "label" : {"en" : "Testing", "id" : "Testing"}
+  // },
+  "faq": {
+      "submenu" : [
+        {"en": "FAQ", "id": "FAQ", "link" : "http://support.veritrans.co.id"}
+      ],
+      "label" : {"en" : "FAQ", "id" : "FAQ"}
+  }
+}
